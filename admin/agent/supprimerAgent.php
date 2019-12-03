@@ -1,5 +1,6 @@
 <?php 
-    require_once('../db.php');
+    require_once('../identifier.php');
+    require_once('../dp.php');
    
     $idA = isset($_GET['idA'])?$_GET['idA']:0;
 

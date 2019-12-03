@@ -1,6 +1,8 @@
 <?php 
-    require_once('../db.php');
-   
+    
+    require_once('../identifier.php');
+    require_once('../dp.php');
+
     $idO = isset($_GET['idO'])?$_GET['idO']:0;
 
     $requete = "delete from offre where id_offre=?";

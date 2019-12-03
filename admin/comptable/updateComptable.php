@@ -1,5 +1,7 @@
 <?php
-    require_once('../db.php');
+    
+    require_once('../identifier.php');
+    require_once('../dp.php');
   
     $idC = isset($_POST['idC'])?$_POST['idC']:0;
     $nomC = isset($_POST['nomC'])?$_POST['nomC']:"";

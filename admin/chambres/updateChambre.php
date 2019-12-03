@@ -1,6 +1,7 @@
 <?php
-    require_once('../db.php');
-  
+    require_once('../identifier.php');
+    require_once('../dp.php');
+   
     $idCH = isset($_POST['idCH'])?$_POST['idCH']:0;
     $design = isset($_POST['des'])?$_POST['des']:"";
     $loc = isset($_POST['loc'])?$_POST['loc']:"";
@@ -10,7 +11,7 @@
 
     $idHotel  = isset($_POST['idHot'])?$_POST['idHot']:1;
     $idCategorie  = isset($_POST['idCat'])?$_POST['idCat']:1;
-    
+        
     $nomPhoto = isset($_FILES['photo']['name'])?$_FILES['photo']['name']:"";
     $imageTemp = $_FILES['photo']['tmp_name'];
     move_uploaded_file($imageTemp,"../chambres/images_chambre/".$nomPhoto);
@@ -23,7 +24,7 @@
         $params = array($design,$loc,$prix,$nbrePerson,$etat,$idHotel,$idCategorie,$idCH);
 
     } 
-        
+            
     $resultat = $pdo->prepare($requete);
     $resultat->execute($params);  
 

@@ -1,6 +1,7 @@
 <?php 
-    require_once('../db.php');
-   
+    require_once('../identifier.php');
+    require_once('../dp.php');
+
     $idH = isset($_GET['idH'])?$_GET['idH']:0;
 
     $requeteChambre = "select count(*) countChambre from chambre where id_chambre=$idH";
@@ -13,7 +14,7 @@
     $tabCountOffre= $resultatOffre->fetch();
     $nbreOffre = $tabCountOffre['countOffre'];
 
-    if(($nbreLigneCommande == 0) && ($nbreOffre == 0) { // vérication s'il n'ya pas des hotels appartenant à cette classe
+    if(($nbreLigneCommande == 0) && ($nbreOffre == 0)) { // vérication s'il n'ya pas des hotels appartenant à cette classe
         $requete = "delete from hotel where id_hotel=?";
         $params = array($idH);
         $resultat = $pdo->prepare($requete);
@@ -22,7 +23,7 @@
 
     }else{
         $msg = "suppression impossible: vous devez supprimer toutes les chambre et les
-                offres appartenant a cet hotel";
+               offres appartenant a cet hotel";
         header("location:../alert.php?message=$msg");        
     }
 

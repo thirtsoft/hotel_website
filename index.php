@@ -1,5 +1,5 @@
 <?php
-include('db.php');
+include('./admin/dp.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

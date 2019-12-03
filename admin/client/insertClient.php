@@ -1,7 +1,8 @@
 <?php
       
-    require_once('../db.php');
-
+    require_once('../identifier.php');
+    require_once('../dp.php');
+    
     $nomCl = isset($_POST['nomCl'])?$_POST['nomCl']:"";
     $prenomCl = isset($_POST['prenomCl'])?$_POST['prenomCl']:"";
     $adCl = isset($_POST['adCl'])?$_POST['adCl']:"";
@@ -12,11 +13,9 @@
 
     $requete = "insert into client(nom_client, prenom_client, addresse_client, ville_client, pays_client, telephone_client, email_client) values(?,?,?,?,?,?,?)";
     $params = array($nomCl, $prenomCl, $adCl, $villeCl, $paysCl, $telCl, $emailCl); 
-    
+        
     $resultat = $pdo->prepare($requete);
     $resultat->execute($params);  
 
-    header('location:listeClient.php');
-    
 
 ?>

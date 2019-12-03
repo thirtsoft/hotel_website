@@ -1,6 +1,8 @@
 <?php
-    require_once('../db.php');
-
+    //require_once('../db.php');
+    require_once('../identifier.php');
+    require_once('../dp.php');
+    
     $idc = isset($_GET['idCl'])?$_GET['idCl']:0;
 
     $requeteCommande = "select count(*) countCommande from commande where id_commande=$idc";
@@ -25,5 +27,5 @@
                 les reservations de ce client";
         header("location:../alert.php?message=$msg");        
     }
-
+    
 ?>

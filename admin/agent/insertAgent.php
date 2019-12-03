@@ -1,6 +1,7 @@
 <?php
       
-    require_once('../db.php');
+    require_once('../identifier.php');
+    require_once('../dp.php');
 
     $NomA = isset($_POST['NomA'])?$_POST['NomA']:"";
     $PrenomA = isset($_POST['PrenomA'])?$_POST['PrenomA']:"";

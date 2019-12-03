@@ -1,6 +1,7 @@
 <?php
-    require_once('../db.php');
-    
+    require_once('../identifier.php');
+    require_once('../dp.php');
+
     $idcat = isset($_GET['idCat'])?$_GET['idCat']:0;
     $requete = "select * from categorie where id_categorie = $idcat";
     $resultat = $pdo->query($requete);
@@ -9,79 +10,198 @@
     $codeCat = $categorie['code_categorie'];
     $prix = $categorie['prix_categorie'];
     $desCat = $categorie['description'];
-    $photoCat = $categorie['photo_categorie'];
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gestion des categories</title>
-    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="../assets/css/monStyle.css" rel="stylesheet" />
-    <!-- FontAwesome Styles-->
-    <link href="../assets/css/font-awesome.css" rel="stylesheet" />
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <?php include("../menu.php");?>
+<html lang="en">
 
-    <div class="container">    
-        <div class="panel panel-primary margetop60">
-            <div class="panel-heading">Edition d'une categorie</div>
-            <div class="panel-body">
-                <form method="post" action="updateCategorie.php" class="form">          
-                    <div class="form-group">
-                        <label for="id">Id de la categorie : <?php echo $idcat ?> </label>
-                        <input type="hidden" name="idCat" class="form-control" 
-                            value="<?php echo $idcat ?>"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="nomCat">Nom : </label>
-                        <input type="text" name="nomCat" 
-                            placeholder="Nom de la categorie" class="form-control" 
-                            value="<?php echo $nomCat ?>"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="codeCat">Code categorie : </label>
-                        <input type="text" name="codeCat" 
-                            placeholder="code categorie" class="form-control" 
-                            value="<?php echo $codeCat ?>"/>
-                    </div> 
-                    <div class="form-group">
-                        <label for="prixCat">Prix : </label>
-                        <input type="text" name="prixCat" 
-                            placeholder="prix categorie" class="form-control" 
-                            value="<?php echo $prix ?>"/>
-                    </div> 
-                    <div class="form-group">
-                        <label for="desCat">Description : </label>
-                        <input type="text" name="desCat" 
-                            placeholder="description categorie" class="form-control" 
-                            value="<?php echo $desCat ?>"/>
-                    </div> 
-                    <div class="form-group">
-                        <label for="photoCat">Photo : </label>
-                        <input type="text" name="photoCat" 
-                            placeholder="photo categorie" class="form-control" 
-                            value="<?php echo $photoCat ?>"/>
-                    </div>                     
-                    <button type="submit"  class="btn btn-success"> 
-                        <span class="glyphicon glyphicon-save "></span> 
-                           Enregistrer 
-                    </button>
-                    <button type="submit"  class="btn btn-success"> 
-                        <a href="listeClasse.php">
-                            <span class="glyphicon glyphicon-retour "></span> 
-                        </a>
-                        Retour
-                    </button>            
-                </form>
-            </div>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin - Hotel</title>
+
+  <!-- Custom fonts for this template -->
+  <link href="../bootstrap4/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="../bootstrap4/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="../bootstrap4/css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="../accueil.php">KADIANDOUMAN</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    
+
+    <!-- Navbar -->
+   
+
+  </nav>
+
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="../accueil.php">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Reservations</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="../client/listeClient.php">Clients</a>
+          <a class="dropdown-item" href="../reservation/listeReservation.php">Reservations</a>
+          <a class="dropdown-item" href="../payement/listePayement.php">Payement</a>
         </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-home"></i>
+          <span>Hotel</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="../categorieChambre/listeCategorieChambre.php">Categorie</a>
+          <a class="dropdown-item" href="../chambres/listeChambre.php">Chambres</a>
+          <a class="dropdown-item" href="../classe/listeClasse.php">Classe</a>
+          <a class="dropdown-item" href="../hotel/listeHotel.php">Hotel</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-home"></i>
+          <span>Comptabilite</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="../tarif/listeTarif.php">Tarif</a>
+          <a class="dropdown-item" href="../offre/listeOffre.php">Offre</a>
+          <a class="dropdown-item" href="../menu/listeMenu.php">Menu</a>
+          <a class="dropdown-item" href="../commande/listeCommande.php">Commande</a>
+          <a class="dropdown-item" href="../commande/listeCommande.php">Ligne Commande</a>
+        </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="../commande/listeCommande.php">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Contact</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../charts.php">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cog"></i>
+          <span>Parametrage</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="../agent/listeAgent.php">Agent</a>
+          <a class="dropdown-item" href="../comptable/listeComptable.php">Comptable</a>
+          <a class="dropdown-item" href="../utilisateur/listeUtilisateur.php">Utilisateur</a>
+          <a class="dropdown-item" href="../role/listeRole.php">Role</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../logout.php">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Déconnexion</span></a>
+      </li>
+    </ul>
+    <div id="content-wrapper">
+      <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Categorie</a>
+          </li>
+          <li class="breadcrumb-item active">Editer Categorie</li>
+        </ol>
+        <div class="card mb-3">
+          <div class="card margetop60">
+              <div class="card-body">
+                  <form method="post" action="updateCategorie.php" class="form"> 
+                      <div class="alert alert-info">
+                        <label for="id">Id categorie : <?php echo $idcat ?> </label>
+                        <input type="hidden" name="idCat" class="form-control" 
+                          value="<?php echo $idcat ?>"/>
+                      </div>         
+                      <div class="form-group">
+                          <label for="nomCat">Nom : </label>
+                          <input type="text" name="nomCat" class="form-control" 
+                              value="<?php echo $nomCat ?>"/>
+                      </div>
+                      <div class="form-group">
+                          <label for="codeCat">Code categorie : </label>
+                          <input type="text" name="codeCat" class="form-control" 
+                              value="<?php echo $codeCat ?>"/>
+                      </div> 
+                      <div class="form-group">
+                          <label for="prixCat">Prix : </label>
+                          <input type="number" name="prixCat" class="form-control" 
+                              value="<?php echo $prix ?>"/>
+                      </div> 
+                      <div class="form-group">
+                          <label for="desCat">Description : </label>
+                          <input type="text" name="desCat" class="form-control" 
+                              value="<?php echo $desCat ?>"/>
+                      </div>                     
+                      <button type="submit" class="btn btn-success"> 
+                          <span class="fas fa-save "></span> 
+                            Enregistrer 
+                      </button>
+                      <button type="submit" class="btn btn-info"> 
+                          <a href="listeClasse.php">
+                              <span class="fas fa-retour "></span> 
+                          </a>
+                          Retour
+                      </button>            
+                  </form>
+              </div>
+          </div>
+        </div>   
+      </div>
+      <!-- Sticky Footer -->
+      <?php include('../footer.php') ?> 
     </div>
+  </div>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+ <!-- Bootstrap core JavaScript-->
+ <script src="../bootstrap4/vendor/jquery/jquery.min.js"></script>
+  <script src="../bootstrap4/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="../bootstrap4/vendor/jquery-easing/jquery.easing.min.js"></script>
+ 
+  <!-- Page level plugin JavaScript-->
+  <script src="../bootstrap4/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../bootstrap4/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="../bootstrap4/js/sb-admin.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="../bootstrap4/js/demo/datatables-demo.js"></script>
+  
 </body>
 </html>

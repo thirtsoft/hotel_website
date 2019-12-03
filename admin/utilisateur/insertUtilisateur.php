@@ -1,6 +1,7 @@
 <?php
    
-    require_once('../db.php');
+    require_once('../identifier.php');
+    require_once('../dp.php');
 
     $login = isset($_POST['username'])?$_POST['username']:"";
     $poste = isset($_POST['poste'])?$_POST['poste']:"";

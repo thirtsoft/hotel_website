@@ -1,6 +1,7 @@
 <?php
-    require_once('../db.php');
-
+    require_once('../identifier.php');
+    require_once('../dp.php');
+    
     $idcat = isset($_GET['idCat'])?$_GET['idCat']:0;
 
     $requeteChambre = "select count(*) countChambre from chambre where id_chambre=$idcat";
@@ -17,8 +18,9 @@
 
     }else{
         $msg = "suppression impossible: vous devez supprimer tous les chambre
-                inscrits dans cette classe";
+               inscrits dans cette classe";
         header("location:../alert.php?message=$msg");        
     }
+ 
 
 ?>

@@ -1,6 +1,7 @@
 <?php
-    require_once('../db.php');
-
+    require_once('../identifier.php');
+    require_once('../dp.php');
+    
     $idCH = isset($_GET['idCH'])?$_GET['idCH']:0;
 
     $requeteReservation = "select count(*) countReservation from reservation where id_reservation=$idCH";
@@ -20,5 +21,6 @@
                 inscrits dans pour cette chambre";
         header("location:../alert.php?message=$msg");        
     }
+
 
 ?>

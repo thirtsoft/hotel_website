@@ -1,12 +1,5 @@
 /*----------------------------------------------
-Author : www.webthemez.com
-License: Commons Attribution 3.0
-http://creativecommons.org/licenses/by/3.0/
-------------------------------------------------*/
-
-
-/*----------------------------------------------
-    COMMON  STYLES    
+    FEUILLE  STYLES    
 ------------------------------------------------*/
 body {
     font-family: 'Open Sans', sans-serif;
@@ -15,7 +8,32 @@ body {
  #wrapper {
     width: 100%;
     background:#09192A;
+    /* ce que j'ai ajouté
+    left: -200px;*/
+    /*permet le temps que met la sidebar pour s'ouvrir ou se fermer*/
+    transition: all 500ms linear; 
 	
+}
+#sidebar {
+    left: -150px;
+}
+
+#sidebar .active {
+	left: 0px;
+}
+
+#wrapper .toggle-btn {
+	position: absolute;
+	left: 230px;
+	top: 20px;
+}
+
+#wrapper .toggle-btn span {
+	display: block;
+	width: 30px;
+	height: 5px;
+	background: #E5EBF2;
+	margin: 5px 0px;
 }
 
 #page-wrapper {
