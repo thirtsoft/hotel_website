@@ -6,35 +6,14 @@
     $nomPrenom = isset($_GET['nomPrenom'])?$_GET['nomPrenom']:"";
     $idutilisateur = isset($_GET['idutilisateur'])?$_GET['idutilisateur']:0;
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
 
-    $requeteUtilisateur = "select * from utilisateur";
+    $requeteComptable = "select id_comptable, nom_comptable, prenom_comptable, tel_comptable, email_comptable, poste 
+        from utilisateur as u, comptable as c
+        where u.id_utilisateur = c.id_utilisateur
+        order by id_comptable";
 
-    if($idutilisateur == 0){
-        $requeteComptable = "select id_comptable, nom_comptable, prenom_comptable, tel_comptable, email_comptable, poste 
-            from utilisateur as u, comptable as c
-            where u.id_utilisateur = c.id_utilisateur
-            and (nom_comptable like '%$nomPrenom%' or prenom_comptable like '%$nomPrenom%')
-            order by id_comptable";
-
-        $requeteCount = "select count(*) countC from comptable
-                where nom_comptable like '%$nomPrenom%' or prenom_comptable like '%$nomPrenom%'";
-    }else{
-        $requeteComptable = "select id_comptable, nom_comptable, prenom_comptable, tel_comptable, email_comptable, poste 
-            from utilisateur as u, comptable as c
-            where u.id_utilisateur = c.id_utilisateur
-            and (nom_comptable like '%$nomPrenom%' or prenom_comptable like '%$nomPrenom%')
-            and u.id_utilisateur = $idutilisateur
-            order by id_comptable";
-
-        $requeteCount = "select count(*) countC from comptable
-            where (nom_comptable like '%$nomPrenom%' or prenom_comptable like '%$nomPrenom%')
-            and id_utilisateur = $idutilisateur";
-    }
-
-    $resultatUtilisateur = $pdo->query($requeteUtilisateur);
+    $requeteCount = "select count(*) countC from comptable";
+   
     $resultatComptable = $pdo->query($requeteComptable);
      
     $resultatCount = $pdo->query($requeteCount);

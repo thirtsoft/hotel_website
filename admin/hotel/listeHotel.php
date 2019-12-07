@@ -3,38 +3,13 @@
     require_once('../identifier.php');
     require_once('../dp.php');
 
-    $nomH = isset($_GET['nomH'])?$_GET['nomH']:"";
-    $idclasse = isset($_GET['idclasse'])?$_GET['idclasse']:0;
+    $requeteHotel = "select id_hotel, nom_hotel, addresse_hotel, ville_hotel, telephone_hotel, email_hotel, nombre_etoile 
+        from classe as cl, hotel as h
+        where cl.id_classe = h.id_classe
+        order by id_hotel desc";
 
-   /*  $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    $requeteClasse = "select * from classe";
-
-    if($idclasse == 0){
-        $requeteHotel = "select id_hotel, nom_hotel, addresse_hotel, ville_hotel, telephone_hotel, email_hotel, nombre_etoile 
-            from classe as cl, hotel as h
-            where cl.id_classe = h.id_classe
-            and (nom_hotel like '%$nomH%')
-            order by id_hotel";
-
-        $requeteCount = "select count(*) countH from hotel
-                where nom_hotel like '%$nomH%'";
-    }else{
-        $requeteHotel = "select id_hotel, nom_hotel, addresse_hotel, ville_hotel, telephone_hotel, email_hotel, nombre_etoile
-            from classe as cl, hotel as h
-            where cl.id_classe = h.id_classe
-            and (nom_hotel like '%$nomH%')
-            and cl.id_classe = $idclasse
-            order by id_hotel";
-
-        $requeteCount = "select count(*) countH from hotel
-            where (nom_hotel like '%$nomH%')
-            and id_classe = $idclasse";
-     }
-
-     $resultatClasse = $pdo->query($requeteClasse);
+    $requeteCount = "select count(*) countH from hotel";
+    
      $resultatHotel = $pdo->query($requeteHotel);
      
      $resultatCount = $pdo->query($requeteCount);

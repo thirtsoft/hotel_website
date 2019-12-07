@@ -6,66 +6,19 @@
     $tarif = isset($_GET['tarif'])?$_GET['tarif']:"";
     $idclasse = isset($_GET['idclasse'])?$_GET['idclasse']:0;
     $idcategorie = isset($_GET['idcategorie'])?$_GET['idcategorie']:0;
-
-  /*   $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    $requeteClasse = "select * from classe";
-    $requeteCategorie = "select * from categorie";
-
-    if(($idclasse == 0) && ($idcategorie == 0)) {
-        $requeteTarif = "select id_tarif, nombre_etoile, nom_categorie, tarif_unitaire
-            from classe as cl, categorie as cat, tarif as t
-            where cl.id_classe = t.id_classe
-            and cat.id_categorie = t.id_categorie
-            and tarif_unitaire like '%$tarif%'
-            order by id_tarif";
-
-        $requeteCount = "select count(*) countT from tarif
-                where tarif_unitaire like '%$tarif%'";
-    }else if (($idclasse != 0) && ($idcategorie == 0)){
-        $requeteTarif = "select id_tarif, nombre_etoile, nom_categorie, tarif_unitaire
-            from classe as cl, categorie as cat, tarif as t
-            where cl.id_classe = t.id_classe
-            and cat.id_categorie = t.id_categorie 
-            and tarif_unitaire like '%$tarif%'
-            and cl.id_classe = $idclasse
-            order by id_tarif";
-
-        $requeteCount = "select count(*) countT from tarif
-            where tarif_unitaire like '%$tarif%'
-            and id_classe = $idclasse";
-    }else if(($idclasse == 0) && ($idcategorie != 0)) {
-        $requeteTarif = "select id_tarif, nombre_etoile, nom_categorie, tarif_unitaire
-            from classe as cl, categorie as cat, tarif as t
-            where cl.id_classe = t.id_classe
-            and cat.id_categorie = t.id_categorie 
-            and tarif_unitaire like '%$tarif%'
-            and cat.id_categorie = $idcategorie
-            order by id_tarif";
-
-        $requeteCount = "select count(*) countT from tarif
-            where tarif_unitaire like '%$tarif%'
-            and id_categorie = $idcategorie";
-
-    }
-
-    $resultatClasse = $pdo->query($requeteClasse);
-    $resultatCategorie = $pdo->query($requeteCategorie);
+  
+    $requeteTarif = "select id_tarif, nombre_etoile, nom_categorie, tarif_unitaire
+        from classe as cl, categorie as cat, tarif as t
+        where cl.id_classe = t.id_classe
+        and cat.id_categorie = t.id_categorie
+        order by id_tarif";
+    $requeteCount = "select count(*) countT from tarif";
+    
     $resultatTarif = $pdo->query($requeteTarif);
      
     $resultatCount = $pdo->query($requeteCount);
     $tabCount = $resultatCount->fetch();
     $nbreTarif = $tabCount['countT']; //decompter le nbre de filiere
-
-    /* $reste = $nbreTarif % $size;
-           
-
-    if(($reste) === 0)
-        $nbrePage = floor($nbreTarif/$size); // permet de prendre que la partie entire de la division
-    else
-        $nbrePage = floor($nbreTarif/$size) + 1; */ // permet de prendre que la partie entiere de la division
 
 ?>
 <!DOCTYPE html>

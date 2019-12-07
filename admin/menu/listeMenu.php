@@ -9,25 +9,10 @@
     $prixM = isset($_GET['prix'])?$_GET['prix']:"";
     $descM = isset($_GET['description'])?$_GET['description']:"";
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    if($prixM == 0){
-        $requete = "select id_menu, code_menu, type, designation, photo_menu, prix, description
-                from menu where designation like '%$designM%'";
+    $requete = "select id_menu, code_menu, type, designation, photo_menu, prix, description
+            from menu";
                 
-        $requeteCount = "select count(*) countM from menu
-                where designation like '%$designM%'";
-    }else{
-        $requete = "select id_menu, code_menu, type, designation,photo_menu, prix, description from menu
-                where designation like '%$designM%'
-                and prix = $prixM";
-
-        $requeteCount = "select count(*) countM from menu
-                where designation like '%$designM%'
-                and prix = $prixM";
-    }
+    $requeteCount = "select count(*) countM from menu";
 
     $resultatMenu = $pdo->query($requete);
 
@@ -35,13 +20,6 @@
     $tabCount = $resultatCount->fetch();
     $nbreMenu = $tabCount['countM']; //decompter le nbre de classe
 
-    /* $reste = $nbreMenu % $size;
-           
-
-    if(($reste) === 0)
-        $nbrePage = floor($nbreMenu/$size);
-    else
-        $nbrePage = floor($nbreMenu/$size) + 1; */
 ?>
 <!DOCTYPE html>
 <html lang="en">

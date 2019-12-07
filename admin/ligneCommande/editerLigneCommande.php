@@ -11,7 +11,8 @@
     $requeteLigneCommande = "select id_ligneCommande, num_commande, quantite, code_menu
         from commande as cmd, ligneCommande as lcmd, menu as m
         where cmd.id_commande = lcmd.id_commande
-        and m.id_menu = lcmd.id_menu";
+        and m.id_menu = lcmd.id_menu
+        and id_ligneCommande = '$idLigneCmd'";
 
     $resultatLigneCommande = $pdo->query($requeteLigneCommande);
     $ligneCommande = $resultatLigneCommande->fetch();
@@ -19,10 +20,13 @@
     $idLcmd = $ligneCommande['id_ligneCommande'];
     
     $requeteMenu = "select id_menu, designation, photo_menu, prix 
-        from menu
-        where id_menu = $idMenu";
+        from menu where id_menu = $idMenu";
     $resultatMenu = $pdo->query($requeteMenu);
     $menu = $resultatMenu->fetch();
+    $requeteCommande = "select id_commande, num_commande
+        from commande where id_commande = $idCmd";
+    $resultatCommande = $pdo->query($requeteCommande);
+    $commande = $resultatCommande->fetch();
     
    
 ?>

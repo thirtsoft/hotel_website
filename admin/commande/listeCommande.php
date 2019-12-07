@@ -6,50 +6,22 @@
     $numCmd = isset($_GET['numCmd'])?$_GET['numCmd']:"";
     $idclient = isset($_GET['idclient'])?$_GET['idclient']:0;
    
-   /*  $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
     $requeteClient = "select * from client";
+  
+    $requeteCommande = "select num_commande, date_commande, heure_commande, nom_client, prenom_client, designation,prix, photo_menu, quantite
+        from client as c, commande as cmd, ligneCommande as lcmd, menu as m
+        where c.id_client = cmd.id_client
+        and cmd.id_commande = lcmd.id_commande
+        and m.id_menu = lcmd.id_menu
+        order by num_commande";
+
+    $requeteCount = "select count(*) countCmd from commande";
    
-    if($idclient == 0) {
-        $requeteCommande = "select num_commande, date_commande, heure_commande, nom_client, prenom_client, designation,prix, photo_menu, quantite
-          from client as c, commande as cmd, ligneCommande as lcmd, menu as m
-          where c.id_client = cmd.id_client
-          and cmd.id_commande = lcmd.id_commande
-          and m.id_menu = lcmd.id_menu
-          and num_commande like '%$numCmd%'";
-
-        $requeteCount = "select count(*) countCmd from commande
-          where num_commande like '%$numCmd%'";
-    }else{
-        $requeteCommande = "select num_commande, date_commande, heure_commande, nom_client, prenom_client, designation, prix, photo_menu, quantite
-          from client as c, commande as cmd, ligneCommande as lcmd, menu as m
-          where c.id_client = cmd.id_client
-          and cmd.id_commande = lcmd.id_commande
-          and m.id_menu = lcmd.id_menu
-          and num_commande like '%$numCmd%'
-          and c.id_client = $idclient";
-
-        $requeteCount =  "select count(*) countCmd from commande
-          where (num_commande like '%$numCmd%')
-          and id_client = $idclient";
-    }
-
-    $resultatClient = $pdo->query($requeteClient);
     $resultatCommande = $pdo->query($requeteCommande);
   
     $resultatCount = $pdo->query($requeteCount);
     $tabCount = $resultatCount->fetch();
     $nbreCommande = $tabCount['countCmd']; //decompter le nbre de filiere
-
-    /* $reste = $nbreReservation % $size;
-           
-
-    if(($reste) === 0)
-        $nbrePage = floor($nbreReservation/$size); // permet de prendre que la partie entire de la division
-    else
-        $nbrePage = floor($nbreReservation/$size) + 1; */ // permet de prendre que la partie entiere de la division
 
 ?>
 <!DOCTYPE html>
@@ -185,31 +157,35 @@
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
-                    <th>Numero</th><th>Nom Client</th><th>Prénom Client</th><th>Photo</th><th>Menu</th><th>Prix</th>
-                      <th>Quantite</th><th>Date</th><th>Heure</th><th>Actions</th>
+                    <th>#</th><th>Client</th><th>Photo</th><th>Menu</th><th>Prix</th>
+                      <th>Qté</th><th>Date</th><th>Heure</th><th>Total</th><th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php while($commande = $resultatCommande->fetch()){ ?> 
                     <tr>
                       <td><?php echo $commande['num_commande'] ?></td>
-                      <td><?php echo $commande['nom_client'] ?></td>
-                      <td><?php echo $commande['prenom_client'] ?></td>
+                      <td><?php echo $commande['nom_client'] ?>&nbsp;
+                      <?php echo $commande['prenom_client'] ?>
                       <td>
                         <img src="../menu/photo_menu/<?php echo $commande['photo_menu'] ?>"
-                          width="50px" height="50px" class="img-circle">
+                          width="40px" height="40px" class="img-circle">
                       </td>
                       <td><?php echo $commande['designation'] ?></td> 
                       <td><?php echo $commande['prix'] ?></td> 
                       <td><?php echo $commande['quantite'] ?></td>  
                       <td><?php echo $commande['date_commande'] ?></td>
                       <td><?php echo $commande['heure_commande'] ?></td> 
+                      <td><?php echo ($commande['prix'] * $commande['quantite']) ?></td> 
                       <td>
                         <a class="btn btn-warning" href="editerCommande.php?numCmd=<?php echo $commande['num_commande'] ?>">
                           <span class="fas fa-edit "></span> 
                         </a>
                         <a class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer cette commande')"
                                href="supprimerCommande.php?numCmd=<?php echo $commande['num_commande'] ?>">
+                           <span class="fas fa-trash "></span> 
+                        </a>
+                        <a class="btn btn-success" href="imprimerCommande.php?numCmd=<?php echo $commande['num_commande'] ?>">
                            <span class="fas fa-trash "></span> 
                         </a>
                       </td>

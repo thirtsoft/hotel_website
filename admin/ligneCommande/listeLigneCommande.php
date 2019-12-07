@@ -12,92 +12,26 @@
     $requete2 = "select * from menu";
     $resultatRequete2 = $pdo->query($requete2);
 
-    $requeteLigneCmd = "select id_ligneCommande, quantite, num_commande, date_commande, designation, photo_menu, prix, code_menu
+    $requeteLigneCmd = "select lcmd.id_ligneCommande, lcmd.quantite, cmd.id_commande, cmd.num_commande, cmd.date_commande, 
+        m.id_menu, m.designation, m.photo_menu, m.prix, m.code_menu
         from commande as cmd, menu as m, lignecommande as lcmd
         where cmd.id_commande = lcmd.id_commande
         and m.id_menu = lcmd.id_menu
-        and cmd.id_commande = $idCmd
-        and m.id_menu = $idMenu
-        order by id_ligneCommande";
+        and cmd.id_commande = lcmd.id_commande
+        order by id_ligneCommande desc";
 
     $resultatLigneCmd = $pdo->query($requeteLigneCmd);
+   
+//    $resultatLigneCommande
     
+    $requeteCount = "select count(*) countLcmd 
+        from commande as c, menu as m, lignecommande as lcmd
+        where c.id_commande = lcmd.id_commande
+        and m.id_menu = lcmd.id_menu";
 
-    $requeteCommande = "select id_commande, num_commande, date_commande from commande";
-    $resultatCommande = $pdo->query($requeteCommande);
-    $commande = $resultatCommande->fetch();
-
-    $requeteMenu = "select id_menu, designation, photo_menu, prix from menu";
-    $resultatMenu = $pdo->query($requeteMenu);
-    $menu = $resultatMenu->fetch();
-
-    if(($idCmd == 0) && ($idMenu == 0)) {
-        $requeteLigneCommande = "select id_ligneCommande, quantite, num_commande, date_commande, designation, photo_menu, prix, code_menu
-            from commande as c, menu as m, lignecommande as lcmd
-            where c.id_commande = lcmd.id_commande
-            and m.id_menu = lcmd.id_menu
-            and m.id_menu = $idMenu
-            and c.id_commande = $idCmd
-            and quantite like '%$quantite%'
-            order by id_ligneCommande";
-
-        $requeteCount = "select count(*) countLcmd 
-            from commande as c, menu as m, lignecommande as lcmd
-            where c.id_commande = lcmd.id_commande
-            and m.id_menu = lcmd.id_menu
-            and quantite like '%$quantite%'";
-
-    }else if (($idCmd != 0) && ($idMenu == 0)){
-        $requeteLigneCommande = "select id_ligneCommande, quantite, num_commande, date_commande, designation, photo_menu, prix, code_menu
-            from commande as c, menu as m, lignecommande as lcmd
-            where c.id_commande = lcmd.id_commande
-            and m.id_menu = lcmd.id_menu
-            and m.id_menu = $idMenu
-            and c.id_commande = $idCmd
-            and quantite like '%$quantite%'
-            order by id_ligneCommande";
-
-        $requeteCount =  "select count(*) countLcmd 
-            from commande as c, menu as m, lignecommande as lcmd
-            where c.id_commande = lcmd.id_commande
-            and m.id_menu = lcmd.id_menu
-            and quantite like '%$quantite%';
-            and id_commande = $idCommande";
-
-     }else if(($idCmd == 0) && ($idMenu != 0)) {
-        $requeteLigneCommande = "select id_ligneCommande, quantite, num_commande, date_commande, designation, photo_menu, prix, code_menu
-            from commande as c, menu as m, lignecommande as lcmd
-            where c.id_commande = lcmd.id_commande
-            and m.id_menu = lcmd.id_menu
-            and m.id_menu = $idMenu
-            and c.id_commande = $idCmd
-            and quantite like '%$quantite%'
-            order by id_ligneCommande";
-
-        $requeteCount = "select count(*) countLcmd 
-            from commande as c, menu as m, lignecommande as lcmd
-            where c.id_commande = lcmd.id_commande
-            and m.id_menu = lcmd.id_menu
-            and quantite like '%$quantite%';
-            and id_menu = $idmenu";
-
-     }
-
-    $resultatCommande = $pdo->query($requeteCommande);
-    $resultatMenu = $pdo->query($requeteMenu);
-    $resultatLigneCommande = $pdo->query($requeteLigneCommande);
-     
     $resultatCount = $pdo->query($requeteCount);
     $tabCount = $resultatCount->fetch();
     $nbreLigneCommande = $tabCount['countLcmd']; //decompter le nbre de filiere
-
-    /* $reste = $nbreLigneCommande % $size;
-           
-
-    if(($reste) === 0)
-        $nbrePage = floor($nbreLigneCommande/$size); // permet de prendre que la partie entire de la division
-    else
-        $nbrePage = floor($nbreLigneCommande/$size) + 1;  */// permet de prendre que la partie entiere de la division
 
 ?>
 <!DOCTYPE html>
@@ -233,7 +167,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php while($ligneCommande = $resultatLigneCommande->fetch()){ ?> 
+                  <?php while($ligneCommande = $resultatLigneCmd->fetch()){ ?> 
                     <tr>
                       <td><?php echo $ligneCommande['num_commande'] ?></td> 
                       <td><?php echo $ligneCommande['designation'] ?></td>
@@ -245,7 +179,8 @@
                       <td><?php echo $ligneCommande['prix'] ?></td>
                       <td><?php echo $ligneCommande['date_commande'] ?></td>
                       <td>
-                        <a class="btn btn-warning" href="editerLigneCommande.php?idLigneCmd=<?php echo $ligneCommande['id_ligneCommande'] ?>&idCmd=<?php echo $ligneCommande['id_commande'] ?>&idMenu=<?php echo $ligneCommande['id_menu'] ?>">
+                        <a class="btn btn-warning" href="editerLigneCommande.php?idLigneCmd=<?php echo $ligneCommande['id_ligneCommande'] ?>&idCmd=<?php echo $ligneCommande['id_commande']?>
+                          &idMenu=<?php echo $ligneCommande['id_menu']?>">
                           <span class="fas fa-edit "></span> 
                         </a>
                         <a class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer cette offre')"

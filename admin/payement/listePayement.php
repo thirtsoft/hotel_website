@@ -1,54 +1,26 @@
 <?php
  
-   // require_once('../db.php');
     require_once('../identifier.php');
     require_once('../dp.php');
  
     $typeP = isset($_GET['typeP'])?$_GET['typeP']:"";
     $idreservation = isset($_GET['idreservation'])?$_GET['idreservation']:0;
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
     $requeteReservation = "select * from reservation";
 
-    if($idreservation == 0){
-        $requetePayement = "select id_payement, type, montant_verse, montant_restant, date_payement, numero_reservation 
-            from reservation as r, payement as p
-            where r.id_reservation = p.id_reservation
-            and (type like '%$typeP%')
-            order by id_payement";
+    $requetePayement = "select id_payement, type, montant_verse, montant_restant, date_payement, numero_reservation 
+        from reservation as r, payement as p
+        where r.id_reservation = p.id_reservation
+        order by id_payement";
 
-        $requeteCount = "select count(*) countP from payement
-                where type like '%$typeP%'";
-    }else{
-        $requetePayement = "select id_payement, type, montant_verse, montant_restant, date_payement, numero_reservation 
-            from reservation as r, payement as p
-            where r.id_reservation = p.id_reservation
-            and (type like '%$typeP%')
-            and r.id_reservation = $idreservation
-            order by id_payement";
-
-        $requeteCount = "select count(*) countP from payement
-            where (type like '%$typeP%')
-            and id_reservation = $idreservation";
-     }
-
-     $resultatPayement = $pdo->query($requetePayement);
-     $resultatReservation = $pdo->query($requeteReservation);
+    $requeteCount = "select count(*) countP from payement";
+   
+    $resultatPayement = $pdo->query($requetePayement);
+    $resultatReservation = $pdo->query($requeteReservation);
      
-     $resultatCount = $pdo->query($requeteCount);
-     $tabCount = $resultatCount->fetch();
-     $nbrePayement = $tabCount['countP']; //decompter le nbre de filiere
-
-     /* $reste = $nbrePayement % $size;
-           
-
-    if(($reste) === 0)
-          $nbrePage = floor($nbrePayement/$size); // permet de prendre que la partie entire de la division
-    else
-          $nbrePage = floor($nbrePayement/$size) + 1; */ // permet de prendre que la partie entiere de la division
+    $resultatCount = $pdo->query($requeteCount);
+    $tabCount = $resultatCount->fetch();
+    $nbrePayement = $tabCount['countP']; //decompter le nbre de filiere
 
 ?>
 <!DOCTYPE html>
@@ -208,6 +180,9 @@
                         </a>
                         <a class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer ce payement')"
                                href="supprimerPayement.php?idP=<?php echo $payement['id_payement'] ?>">
+                           <span class="fas fa-trash "></span> 
+                        </a>
+                        <a class="btn btn-success" href="imprimerPayement.php?idP=<?php echo $payement['id_payement'] ?>">
                            <span class="fas fa-trash "></span> 
                         </a>
                       </td>

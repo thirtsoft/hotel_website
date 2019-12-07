@@ -7,57 +7,35 @@
     $idclient = isset($_GET['idclient'])?$_GET['idclient']:0;
     $idchambre = isset($_GET['idchambre'])?$_GET['idchambre']:0;
 
-   /*  $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
     $requeteClient = "select * from client";
     $requeteChambre = "select * from chambre";
 
-    if(($idclient == 0) && ($idchambre == 0)) {
-        $requeteReservation = "select id_reservation, numero_reservation, date_debut, date_fin, nom_client, prenom_client, designation_chambre, photo_chambre, prix_chambre
-            from client as cl, chambre as ch, reservation r
-            where cl.id_client = r.id_client
-            and ch.id_chambre = r.id_chambre
-            and numero_reservation like '%$numReservation%'
-            order by id_reservation";
+    $requeteReservation = "select id_reservation, numero_reservation, date_debut, date_fin, nom_client, prenom_client, designation_chambre, photo_chambre, prix_chambre
+        from client as cl, chambre as ch, reservation r
+        where cl.id_client = r.id_client
+        and ch.id_chambre = r.id_chambre
+        order by id_reservation";
 
-        $requeteCount = "select count(*) countR from reservation
-                where numero_reservation like '%$numReservation%'";
-    }else if (($idclient != 0) && ($idchambre == 0)){
-        $requeteReservation = "select id_reservation, numero_reservation, date_debut, date_fin, nom_client, prenom_client, designation_chambre, photo_chambre, prix_chambre
-            from client as cl, chambre as ch, reservation r
-            where cl.id_client = r.id_client
-            and ch.id_chambre = r.id_chambre
-            and numero_reservation like '%$numReservation%'
-            and cl.id_client = $idclient
-            order by id_reservation";
-
-        $requeteCount =  "select count(*) countR from reservation
-            where numero_reservation like '%$numReservation%'
-            and id_client = $idclient";
-     }else if(($idclient == 0) && ($idchambre != 0)) {
-        $requeteReservation = "select id_reservation, numero_reservation, date_debut, date_fin, nom_client, prenom_client, designation_chambre, photo_chambre, prix_chambre
-            from client as cl, chambre as ch, reservation r
-            where cl.id_client = r.id_client
-            and ch.id_chambre = r.id_chambre
-            and numero_reservation like '%$numReservation%'
-            and ch.id_chambre = $idchambre
-            order by id_reservation";
-
-        $requeteCount = "select count(*) countR from reservation
-            where numero_reservation like '%$numReservation%'
-            and id_chambre = $idchambre";
-
-     }
-
-    $resultatClient = $pdo->query($requeteClient);
-    $resultatChambre = $pdo->query($requeteChambre);
+    $requeteCount = "select count(*) countR from reservation";
+   
     $resultatReservation = $pdo->query($requeteReservation);
      
     $resultatCount = $pdo->query($requeteCount);
     $tabCount = $resultatCount->fetch();
     $nbreReservation = $tabCount['countR']; //decompter le nbre de filiere
+
+    //Nbre de jour de reservation
+    $reqNbreJours =  $pdo->prepare("select abs(datediff(date_fin, date_debut)) as nbreJour from reservation");
+    $reqNbreJours->execute();
+    $resultNbreJour = array();
+    while($data = $reqNbreJours->fetch(PDO::FETCH_ASSOC)){
+      extract($data);
+      $resultNbreJour[] = $data['nbreJour'];
+      
+    }
+    //echo ($resultNbreJour);
+
+   
 
     /* $reste = $nbreReservation % $size;
            
@@ -252,8 +230,8 @@
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
-                    <th>Numéro</th><th>Nom et Prénom Client</th><th>Chambre</th><th>Photo</th>
-                        <th>Prix</th><th>Début</th><th>Fin</th><th>Actions</th>
+                    <th>Numéro</th><th>Nom et Prénom</th><th>Photo</th>
+                        <th>Prix</th><th>Début</th><th>Fin</th><th>Nbr.Jours</th><th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -261,9 +239,8 @@
                     <tr>
                       <td><?php echo $reservation['numero_reservation'] ?></td> 
                       <td><?php echo $reservation['nom_client'] ?>&nbsp;
-                      <?php echo $reservation['prenom_client'] ?>
+                          <?php echo $reservation['prenom_client'] ?>
                       </td>
-                      <td><?php echo $reservation['designation_chambre'] ?></td>
                       <td>
                         <img src="../chambres/images_chambre/<?php echo $reservation['photo_chambre'] ?>"
                            width="50px" height="50px" class="img-circle">
@@ -271,6 +248,8 @@
                       <td><?php echo $reservation['prix_chambre'] ?></td>
                       <td><?php echo $reservation['date_debut'] ?></td>
                       <td><?php echo $reservation['date_fin'] ?></td>
+                      <td><?php echo $reservation['designation_chambre'] ?>
+                      </td>
                       <td>
                         <a class="btn btn-warning" href="editerReservation.php?idR=<?php echo $reservation['id_reservation'] ?>">
                           <span class="fas fa-edit "></span> 

@@ -184,7 +184,7 @@
                       <div>
                         <label>Etat Chambre</label>&nbsp; &nbsp;<?php echo $ch['etat_chambre']?>
                       </div>
-                      <h4 style="color:#black;"><?php echo "Prix: Php. ".$ch['prix_chambre'].".00"?></h4>
+                      <h4 style="color:#black;"><?php echo "Prix : ".$ch['prix_chambre'].".00 CFA par jour"?></h4>
                     </div>
                     <a href="addReservation.php?id_chambre=<?php echo $ch['id_chambre']?>" class="btn btn-success" style="margin-left:580px;">
                        <i class="fas fa-list"></i> Reserve

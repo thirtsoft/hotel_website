@@ -1,30 +1,11 @@
 <?php
     require_once('../identifier.php');
     require_once('../dp.php');
-     
-    $nomCat = isset($_GET['nomCat'])?$_GET['nomCat']:"";
-    $codeCat = isset($_GET['codeCat'])?$_GET['codeCat']:"";
+  
+    $requete = "select * from categorie";
 
-   /*  $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    if($codeCat == ""){
-        $requete = "select * from categorie
-                   where nom_categorie like '%$nomCat%'";
-
-        $requeteCount = "select count(*) countCat from categorie
-                where nom_categorie like '%$nomCat%'";
-    }else{
-        $requete = "select * from categorie
-                where nom_categorie like '%$nomCat%'
-                and code_categorie = '$codeCat'";
-
-        $requeteCount = "select count(*) countCat from categorie
-                where nom_categorie like '%$nomCat%'
-                and code_categorie = '$codeCat'";
-    }
-
+    $requeteCount = "select count(*) countCat from categorie";
+    
     $resultatCategorie = $pdo->query($requete);
 
     $resultatCount = $pdo->query($requeteCount);

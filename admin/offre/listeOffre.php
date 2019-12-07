@@ -7,65 +7,22 @@
     $idhotel = isset($_GET['idhotel'])?$_GET['idhotel']:0;
     $idmenu = isset($_GET['idmenu'])?$_GET['idmenu']:0;
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
     $requeteHotel = "select * from hotel";
     $requeteMenu = "select * from menu";
 
-    if(($idhotel == 0) && ($idmenu == 0)) {
-        $requeteOffre = "select id_offre, nature, qualite, nom_hotel, designation
-            from hotel as h, menu as m, offre as o
-            where h.id_hotel = o.id_hotel
-            and m.id_menu = o.id_menu
-            and nature like '%$natureOffre%'
-            order by id_offre";
+    $requeteOffre = "select id_offre, nature, qualite, nom_hotel, designation
+        from hotel as h, menu as m, offre as o
+        where h.id_hotel = o.id_hotel
+        and m.id_menu = o.id_menu
+        order by id_offre";
 
-        $requeteCount = "select count(*) countO from offre
-                where nature like '%$natureOffre%'";
-    }else if (($idhotel != 0) && ($idmenu == 0)){
-        $requeteOffre = "select id_offre, nature, qualite, nom_hotel, designation
-            from hotel as h, menu as m, offre as o
-            where h.id_hotel = o.id_hotel
-            and m.id_menu = o.id_menu
-            and nature like '%$natureOffre%'
-            and h.id_hotel = $idhotel
-            order by id_offre";
-
-        $requeteCount =  "select count(*) countO from offre
-            where nature like '%$natureOffre%'
-            and id_hotel = $idhotel";
-     }else if(($idhotel == 0) && ($idmenu != 0)) {
-        $requeteOffre = "select id_offre, nature, qualite, nom_hotel, designation
-            from hotel as h, menu as m, offre as o
-            where h.id_hotel = o.id_hotel
-            and m.id_menu = o.id_menu
-            and nature like '%$natureOffre%'
-            and m.id_menu = $idmenu
-            order by id_offre";
-
-        $requeteCount = "select count(*) countO from offre
-            where nature like '%$natureOffre%'
-            and id_menu = $idmenu";
-
-     }
-
-    $resultatHotel = $pdo->query($requeteHotel);
-    $resultatMenu = $pdo->query($requeteMenu);
+    $requeteCount = "select count(*) countO from offre";
+    
     $resultatOffre = $pdo->query($requeteOffre);
      
     $resultatCount = $pdo->query($requeteCount);
     $tabCount = $resultatCount->fetch();
     $nbreOffre = $tabCount['countO']; //decompter le nbre de filiere
-
-    /* $reste = $nbreOffre % $size;
-           
-
-    if(($reste) === 0)
-        $nbrePage = floor($nbreOffre/$size); // permet de prendre que la partie entire de la division
-    else
-        $nbrePage = floor($nbreOffre/$size) + 1; */ // permet de prendre que la partie entiere de la division
 
 ?>
 <!DOCTYPE html>

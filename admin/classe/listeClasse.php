@@ -3,29 +3,10 @@
     require_once('../identifier.php');
     require_once('../dp.php');
      
-    $nbreEtoile = isset($_GET['nbreEtoile'])?$_GET['nbreEtoile']:"";
-    $caracteristique = isset($_GET['caracteristique'])?$_GET['caracteristique']:"";
+    $requete = "select * from classe";
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    if($caracteristique == ""){
-        $requete = "select * from classe
-                   where nombre_etoile like '%$nbreEtoile%'";
-
-        $requeteCount = "select count(*) countC from classe
-                where nombre_etoile like '%$nbreEtoile%'";
-    }else{
-        $requete = "select * from classe
-                where nombre_etoile like '%$nbreEtoile%'
-                and caracteristique = '$caracteristique'";
-
-        $requeteCount = "select count(*) countC from classe
-                where nombre_etoile like '%$nbreEtoile%'
-                and caracteristique = '$caracteristique'";
-    }
-
+    $requeteCount = "select count(*) countC from classe";
+    
     $resultatClasse = $pdo->query($requete);
 
     $resultatCount = $pdo->query($requeteCount);

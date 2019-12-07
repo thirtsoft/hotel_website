@@ -3,38 +3,13 @@
     require_once('../identifier.php');
     require_once('../dp.php');
 
-    $nomPrenom = isset($_GET['nomPrenom'])?$_GET['nomPrenom']:"";
-    $idutilisateur = isset($_GET['idutilisateur'])?$_GET['idutilisateur']:0;
+    $requeteAgent = "select id_agent, nom_agent, prenom_agent, tel_agent, email_agent, poste 
+        from utilisateur as u, agent as a
+        where u.id_utilisateur = a.id_utilisateur
+        order by id_agent";
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    $requeteUtilisateur = "select * from utilisateur";
-
-    if($idutilisateur == 0){
-        $requeteAgent = "select id_agent, nom_agent, prenom_agent, tel_agent, email_agent, poste 
-            from utilisateur as u, agent as a
-            where u.id_utilisateur = a.id_utilisateur
-            and (nom_agent like '%$nomPrenom%' or prenom_agent like '%$nomPrenom%')
-            order by id_agent";
-
-        $requeteCount = "select count(*) countA from agent
-                where nom_agent like '%$nomPrenom%' or prenom_agent like '%$nomPrenom%'";
-    }else{
-        $requeteAgent = "select id_agent, nom_agent, prenom_agent, tel_agent, email_agent, poste 
-            from utilisateur as u, agent as a
-            where u.id_utilisateur = a.id_utilisateur
-            and (nom_agent like '%$nomPrenom%' or prenom_agent like '%$nomPrenom%')
-            and u.id_utilisateur = $idutilisateur
-            order by id_agent";
-
-        $requeteCount = "select count(*) countA from agent
-            where (nom_agent like '%$nomPrenom%' or prenom_agent like '%$nomPrenom%')
-            and id_utilisateur = $idutilisateur";
-    }
-
-    $resultatUtilisateur = $pdo->query($requeteUtilisateur);
+    $requeteCount = "select count(*) countA from agent";
+    
     $resultatAgent = $pdo->query($requeteAgent);
      
     $resultatCount = $pdo->query($requeteCount);

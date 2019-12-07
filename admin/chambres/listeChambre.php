@@ -4,55 +4,15 @@
     require_once('../dp.php');
 
     $desCH = isset($_GET['desCH'])?$_GET['desCH']:"";
-    $idhotel = isset($_GET['idhotel'])?$_GET['idhotel']:0;
-    $idcategorie = isset($_GET['idcategorie'])?$_GET['idcategorie']:0;
+   
+    $requeteChambre = "select id_chambre, designation_chambre, nom_hotel, nom_categorie, localisation, prix_chambre, nbre_personnes, etat_chambre, photo_chambre
+        from hotel as h, categorie as cat, chambre ch
+        where h.id_hotel = ch.id_hotel
+        and cat.id_categorie = ch.id_categorie
+        order by id_chambre";
 
-   /*  $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
-    $requeteHotel = "select * from hotel";
-    $requeteCategorie = "select * from categorie";
-
-    if(($idhotel == 0) && ($idcategorie == 0)) {
-        $requeteChambre = "select id_chambre, designation_chambre, nom_hotel, nom_categorie, localisation, prix_chambre, nbre_personnes, etat_chambre, photo_chambre
-            from hotel as h, categorie as cat, chambre ch
-            where h.id_hotel = ch.id_hotel
-            and cat.id_categorie = ch.id_categorie
-            and designation_chambre like '%$desCH%'
-            order by id_chambre";
-
-        $requeteCount = "select count(*) countCH from chambre
-                where designation_chambre like '%$desCH%'";
-    }else if (($idhotel != 0) && ($idcategorie == 0)){
-        $requeteChambre = "select id_chambre, designation_chambre, nom_hotel, nom_categorie, localisation, prix_chambre, nbre_personnes, etat_chambre, photo_chambre
-            from hotel as h, categorie as cat, chambre ch
-            where h.id_hotel = ch.id_hotel
-            and cat.id_categorie = ch.id_categorie
-            and designation_chambre like '%$desCH%'
-            and h.id_hotel = $idhotel
-            order by id_chambre";
-
-        $requeteCount =  "select count(*) countCH from chambre
-            where designation_chambre like '%$desCH%'
-            and id_hotel = $idhotel";
-     }else if(($idhotel == 0) && ($idcategorie != 0)) {
-        $requeteChambre = "select id_chambre, designation_chambre, nom_hotel, nom_categorie, localisation, prix_chambre, nbre_personnes, etat_chambre, photo_chambre
-            from hotel as h, categorie as cat, chambre ch
-            where h.id_hotel = ch.id_hotel
-            and cat.id_categorie = ch.id_categorie
-            and designation_chambre like '%$desCH%'
-            and cat.id_categorie = $idcategorie
-            order by id_chambre";
-
-        $requeteCount = "select count(*) countCH from chambre
-            where designation_chambre like '%$desCH%'
-            and id_categorie = $idcategorie";
-
-     }
-
-    $resultatHotel = $pdo->query($requeteHotel);
-    $resultatCategorie = $pdo->query($requeteCategorie);
+    $requeteCount = "select count(*) countCH from chambre";
+    
     $resultatChambre = $pdo->query($requeteChambre);
      
     $resultatCount = $pdo->query($requeteCount);

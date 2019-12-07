@@ -6,42 +6,18 @@
     $nomR = isset($_GET['nomRole'])?$_GET['nomRole']:"";
     $descR = isset($_GET['desc'])?$_GET['desc']:"";
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-
     $requeteRole = "select * from role";
 
-    if($descR == ""){
-        $requeteRole = "select id_role, nom_role, description 
-            from role where nom_role like '%$nomR%'
-            order by id_role";
+    $requeteRole = "select id_role, nom_role, description 
+        from role order by id_role";
 
-        $requeteCount = "select count(*) countR from role
-                where nom_role like '%$nomR%'";
-    }else{
-        $requeteRole = "select id_role, nom_role, description 
-            from role where nom_role '%$nomPrenom%'
-            and description = '$descR'";
-
-        $requeteCount = "select count(*) countR from role
-            where nom_role like '%$nomR%'
-            and description = '$descR'";
-    }
-
+    $requeteCount = "select count(*) countR from role";
+  
     $resultatRole = $pdo->query($requeteRole);
      
     $resultatCount = $pdo->query($requeteCount);
     $tabCount = $resultatCount->fetch();
     $nbreRole = $tabCount['countR']; //decompter le nbre de filiere
-
-    /* $reste = $nbreRole % $size;
-           
-
-    if(($reste) === 0)
-        $nbrePage = floor($nbreRole/$size); // permet de prendre que la partie entire de la division
-    else
-        $nbrePage = floor($nbreRole/$size) + 1; */ // permet de prendre que la partie entiere de la division
 
 ?>
 <!DOCTYPE html>

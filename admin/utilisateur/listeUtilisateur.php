@@ -6,48 +6,18 @@
     $login = isset($_GET['login'])?$_GET['login']:"";
     $idrole = isset($_GET['idrole'])?$_GET['idrole']:0;
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
+    $requeteUtilisateur = "select id_utilisateur,username,password,poste,actived,nom_role 
+        from role as r, utilisateur as u
+        where r.id_role = u.id_role
+        order by id_utilisateur";
 
-    $requeteRole = "select * from role";
-
-    if($idrole == 0){
-        $requeteUtilisateur = "select id_utilisateur,username,password,poste,actived,nom_role 
-            from role as r, utilisateur as u
-            where r.id_role = u.id_role
-            and (username like '%$login%')
-            order by id_utilisateur";
-
-        $requeteCount = "select count(*) countU from utilisateur
-                where username like '%$login%'";
-    }else{
-        $requeteUtilisateur = "select id_utilisateur,username,password,poste,actived,nom_role
-            from role as r, utilisateur as u
-            where r.id_role = u.id_role
-            and (username like '%$login%')
-            and r.id_role = $idrole
-            order by id_utilisateur";
-
-        $requeteCount = "select count(*) countU from utilisateur
-            where (username like '%$login%')
-            and id_role = $idrole";
-     }
-
-     $resultatRole = $pdo->query($requeteRole);
-     $resultatUtilisateur = $pdo->query($requeteUtilisateur);
+    $requeteCount = "select count(*) countU from utilisateur";
+   
+    $resultatUtilisateur = $pdo->query($requeteUtilisateur);
      
-     $resultatCount = $pdo->query($requeteCount);
-     $tabCount = $resultatCount->fetch();
-     $nbreUtilisateur = $tabCount['countU']; //decompter le nbre de filiere
-
-     /* $reste = $nbreUtilisateur % $size;
-           
-
-     if(($reste) === 0)
-          $nbrePage = floor($nbreUtilisateur/$size); // permet de prendre que la partie entire de la division
-     else
-          $nbrePage = floor($nbreUtilisateur/$size) + 1; *///  permet de prendre que la partie entiere de la division
+    $resultatCount = $pdo->query($requeteCount);
+    $tabCount = $resultatCount->fetch();
+    $nbreUtilisateur = $tabCount['countU']; //decompter le nbre de filiere
 
 ?>
 <!DOCTYPE html>
