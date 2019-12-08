@@ -1,6 +1,6 @@
 <?php     
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idr = isset($_POST['idR'])?$_POST['idR']:0;
     $nom = isset($_POST['nom'])?$_POST['nom']:"";

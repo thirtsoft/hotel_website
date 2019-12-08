@@ -1,6 +1,6 @@
 <?php
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $idcat = isset($_GET['idCat'])?$_GET['idCat']:0;
 

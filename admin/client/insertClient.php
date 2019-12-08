@@ -1,7 +1,7 @@
 <?php
       
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $nomCl = isset($_POST['nomCl'])?$_POST['nomCl']:"";
     $prenomCl = isset($_POST['prenomCl'])?$_POST['prenomCl']:"";

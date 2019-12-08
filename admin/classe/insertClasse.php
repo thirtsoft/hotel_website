@@ -1,6 +1,6 @@
 <?php
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $nbreEtoile = isset($_POST['nbreEtoile'])?$_POST['nbreEtoile']:"";
     $caracteristique = isset($_POST['caracteristique'])?$_POST['caracteristique']:"";

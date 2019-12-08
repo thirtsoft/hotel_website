@@ -1,6 +1,6 @@
 <?php
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idUtilisateur = isset($_GET['idU'])?$_GET['idU']:0;
     $actived = isset($_GET['actived'])?$_GET['actived']:0;

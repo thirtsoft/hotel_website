@@ -1,7 +1,7 @@
 <?php
     
-   require_once('../identifier.php');
-   require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $typeP = isset($_POST['typeP'])?$_POST['typeP']:"";
     $montantP = isset($_POST['montantP'])?$_POST['montantP']:"";

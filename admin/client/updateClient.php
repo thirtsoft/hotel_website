@@ -1,7 +1,7 @@
 <?php     
-    //require_once('../db.php');
-    require_once('../identifier.php');
-    require_once('../dp.php');
+   
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idc = isset($_POST['idCl'])?$_POST['idCl']:0;
     $nomClient = isset($_POST['nomCl'])?$_POST['nomCl']:"";

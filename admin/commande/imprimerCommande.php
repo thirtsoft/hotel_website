@@ -1,6 +1,6 @@
 <?php
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     require_once('../fpdf/fpdf.php');
 
     $numCmd = isset($_GET['numCmd'])?$_GET['numCmd']:"";

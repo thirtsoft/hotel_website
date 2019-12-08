@@ -1,7 +1,7 @@
 <?php 
     
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idLigneCmd = isset($_GET['idLigneCmd'])?$_GET['idLigneCmd']:0;
     
@@ -26,8 +26,7 @@
     $requeteCommande = "select id_commande, num_commande
         from commande where id_commande = $idCmd";
     $resultatCommande = $pdo->query($requeteCommande);
-    $commande = $resultatCommande->fetch();
-    
+    $commande = $resultatCommande->fetch(); 
    
 ?>
 <!DOCTYPE html>
@@ -58,7 +57,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="../accueil.php">KADIANDOUMAN</a>
+    <a class="navbar-brand mr-1" href="../../accueil.php">KADIANDOUMAN</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -67,14 +66,13 @@
     <!-- Navbar Search -->
     
     <!-- Navbar -->
-   
   </nav>
 
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="accueil.php">
+        <a class="nav-link" href="../../accueil.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
@@ -138,7 +136,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../logout.php">
+        <a class="nav-link" href="../../logout.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Déconnexion</span></a>
       </li>
@@ -208,7 +206,7 @@
         </div>
       </div>
       <!-- Sticky Footer -->
-      <?php include('../footer.php') ?>
+      <?php include('../../footer.php') ?>
     </div>
   </div>
  <!-- Scroll to Top Button-->

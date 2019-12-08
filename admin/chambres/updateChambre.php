@@ -1,6 +1,6 @@
 <?php
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
    
     $idCH = isset($_POST['idCH'])?$_POST['idCH']:0;
     $design = isset($_POST['des'])?$_POST['des']:"";

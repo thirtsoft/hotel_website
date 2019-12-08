@@ -1,6 +1,6 @@
 <?php
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idT = isset($_POST['idT'])?$_POST['idT']:0;
     $idClasse = isset($_POST['idC'])?$_POST['idC']:1;

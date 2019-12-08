@@ -1,7 +1,7 @@
 <?php
  
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idP = isset($_POST['idP'])?$_POST['idP']:0;
     $idReservation = isset($_POST['id_reservation'])?$_POST['id_reservation']:1;

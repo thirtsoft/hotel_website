@@ -1,6 +1,6 @@
 <?php     
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $idcat = isset($_POST['idCat'])?$_POST['idCat']:0;
     $nomCat = isset($_POST['nomCat'])?$_POST['nomCat']:"";

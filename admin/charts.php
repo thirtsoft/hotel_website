@@ -1,7 +1,7 @@
 <?php
 
-    require_once('identifier.php');
-    require_once('dp.php');
+    require_once('../identifier.php');
+    require_once('../dp.php');
 
     // Liste des années
     $reqReservation = $pdo->prepare("select DISTINCT annee from reservation order by annee asc");
@@ -119,7 +119,7 @@
      <!-- Sidebar -->
      <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="accueil.php">
+        <a class="nav-link" href="../accueil.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
@@ -184,7 +184,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">
+        <a class="nav-link" href="../logout.php">
           <i class="fa fa-sign-out"></i>
           <span>Déconnexion</span></a>
       </li>
@@ -217,7 +217,7 @@
         </p>
 
       </div>
-      <?php include ('footer.php');?>
+      <?php include ('../footer.php');?>
     </div>
   </div>
 

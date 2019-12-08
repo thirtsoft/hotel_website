@@ -66,13 +66,13 @@
   <title>Admin - Hotel</title>
 
   <!-- Custom fonts for this template -->
-  <link href="./bootstrap4/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="admin/bootstrap4/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="./bootstrap4/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+  <link href="admin/bootstrap4/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="./bootstrap4/css/sb-admin.css" rel="stylesheet">
+  <link href="admin/bootstrap4/css/sb-admin.css" rel="stylesheet">
 
 </head>
 
@@ -155,9 +155,9 @@
           <span>Reservations</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="../admin/client/listeClient.php">Clients</a>
-          <a class="dropdown-item" href="../admin/reservation/listeReservation.php">Reservations</a>
-          <a class="dropdown-item" href="../admin/payement/listePayement.php">Payements</a>
+          <a class="dropdown-item" href="admin/client/listeClient.php">Clients</a>
+          <a class="dropdown-item" href="admin/reservation/listeReservation.php">Reservations</a>
+          <a class="dropdown-item" href="admin/payement/listePayement.php">Payements</a>
         </div>
       </li>';}
       ?>
@@ -167,10 +167,10 @@
           <span>Hotel</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="../admin/categorieChambre/listeCategorieChambre.php">Categorie</a>
-          <a class="dropdown-item" href="../admin/chambres/listeChambre.php">Chambres</a>
-          <a class="dropdown-item" href="../admin/classe/listeClasse.php">Classe</a>
-          <a class="dropdown-item" href="../admin/hotel/listeHotel.php">Hotel</a>
+          <a class="dropdown-item" href="admin/categorieChambre/listeCategorieChambre.php">Categorie</a>
+          <a class="dropdown-item" href="admin/chambres/listeChambre.php">Chambres</a>
+          <a class="dropdown-item" href="admin/classe/listeClasse.php">Classe</a>
+          <a class="dropdown-item" href="admin/hotel/listeHotel.php">Hotel</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -179,12 +179,12 @@
           <span>Comptabilité</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="../admin/tarif/listeTarif.php">Tarif</a>
-          <a class="dropdown-item" href="../admin/offre/listeOffre.php">Offre</a>
-          <a class="dropdown-item" href="../admin/classe/listeClasse.php">Menu</a>
-          <a class="dropdown-item" href="../admin/commande/listeCommande.php">Commande</a>
-          <a class="dropdown-item" href="../admin/ligneCommande/listeLigneCommande.php">Ligne Commande</a>
-          <a class="dropdown-item" href="../admin/commande/listeCommande.php">Facture</a>
+          <a class="dropdown-item" href="admin/tarif/listeTarif.php">Tarif</a>
+          <a class="dropdown-item" href="admin/offre/listeOffre.php">Offre</a>
+          <a class="dropdown-item" href="admin/classe/listeClasse.php">Menu</a>
+          <a class="dropdown-item" href="admin/commande/listeCommande.php">Commande</a>
+          <a class="dropdown-item" href="admin/ligneCommande/listeLigneCommande.php">Ligne Commande</a>
+          <a class="dropdown-item" href="admin/commande/listeCommande.php">Facture</a>
         </div>
       </li>
       <li class="nav-item">
@@ -193,7 +193,7 @@
           <span>Contact</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.php">
+        <a class="nav-link" href="admin/charts.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
@@ -203,10 +203,10 @@
           <span>Parametrage</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="../admin/agent/listeAgent.php">Agent</a>
-          <a class="dropdown-item" href="../admin/comptable/listeComptable.php">Comptable</a>
-          <a class="dropdown-item" href="../admin/utilisateur/listeUtilisateur.php">Utilisateur</a>
-          <a class="dropdown-item" href="../admin/role/listeRole.php">Role</a>
+          <a class="dropdown-item" href="admin/agent/listeAgent.php">Agent</a>
+          <a class="dropdown-item" href="admin/comptable/listeComptable.php">Comptable</a>
+          <a class="dropdown-item" href="admin/utilisateur/listeUtilisateur.php">Utilisateur</a>
+          <a class="dropdown-item" href="admin/role/listeRole.php">Role</a>
         </div>
       </li>
       <li class="nav-item">
@@ -236,7 +236,7 @@
                 </div>
                 <div class="mr-5"><?php echo $nbreChambre ?> (chambres)</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../admin/chambres/listeChambre.php">
+              <a class="card-footer text-white clearfix small z-1" href="admin/chambres/listeChambre.php">
                 <span class="float-left">Voir Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -252,7 +252,7 @@
                 </div>
                 <div class="mr-5"><?php echo $nbreClient ?> (clients)</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../admin/client/listeClient.php">
+              <a class="card-footer text-white clearfix small z-1" href="admin/client/listeClient.php">
                 <span class="float-left">Voir Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -268,7 +268,7 @@
                 </div>
                 <div class="mr-5"><?php echo $nbreReservation ?> (reservations)</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../admin/reservation/listeReservation.php">
+              <a class="card-footer text-white clearfix small z-1" href="admin/reservation/listeReservation.php">
                 <span class="float-left">Voir Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -284,7 +284,7 @@
                 </div>
                 <div class="mr-5"><?php echo $nbreCommande ?> (commandes)</div>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="../admin/commande/listeCommande.php">
+              <a class="card-footer text-white clearfix small z-1" href="admin/commande/listeCommande.php">
                 <span class="float-left">Voir Details</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
@@ -354,19 +354,19 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="./bootstrap4/vendor/jquery/jquery.min.js"></script>
-  <script src="./bootstrap4/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="admin/bootstrap4/vendor/jquery/jquery.min.js"></script>
+  <script src="admin/bootstrap4/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="./bootstrap4/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="admin/bootstrap4/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="./bootstrap4/vendor/chart.js/Chart.min.js"></script>
-  <script src="./bootstrap4/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="./bootstrap4/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="admin/bootstrap4/vendor/chart.js/Chart.min.js"></script>
+  <script src="admin/bootstrap4/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="admin/bootstrap4/vendor/datatables/dataTables.bootstrap4.js"></script>
   
   <!-- Custom scripts for all pages-->
-  <script src="./bootstrap4/js/sb-admin.min.js"></script>
+  <script src="admin/bootstrap4/js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
  <!--  <script src="./bootstrap4/js/demo/chart-area-demo.js"></script> -->

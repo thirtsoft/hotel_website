@@ -1,7 +1,7 @@
 <?php
     
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
    // $idCmd = isset($_POST['idCmd'])?$_POST['idCmd']:0;
     $numCmd = isset($_POST['numCmd'])?$_POST['numCmd']:"";

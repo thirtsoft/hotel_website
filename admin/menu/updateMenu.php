@@ -1,7 +1,7 @@
 <?php     
     
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $idm = isset($_POST['idM'])?$_POST['idM']:0;
     $codeM = isset($_POST['codeM'])?$_POST['codeM']:"";

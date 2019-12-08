@@ -1,7 +1,7 @@
 <?php
       
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $desC = isset($_POST['desC'])?$_POST['desC']:"";
     $locC = isset($_POST['locC'])?$_POST['locC']:"";

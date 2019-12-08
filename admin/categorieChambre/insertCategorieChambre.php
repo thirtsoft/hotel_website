@@ -1,7 +1,7 @@
 <?php
 
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $nomCat = isset($_POST['nomCat'])?$_POST['nomCat']:"";
     $codeCat = isset($_POST['codeCat'])?$_POST['codeCat']:"";

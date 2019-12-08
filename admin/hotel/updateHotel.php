@@ -1,7 +1,7 @@
 <?php
-   // require_once('../db.php');
-    require_once('../identifier.php');
-    require_once('../dp.php');
+   
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
    
     $idH = isset($_POST['idH'])?$_POST['idH']:0;
     $idClasse = isset($_POST['idC'])?$_POST['idC']:1;

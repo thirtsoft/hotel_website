@@ -1,6 +1,6 @@
 <?php 
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $idP = isset($_GET['idP'])?$_GET['idP']:0;
 

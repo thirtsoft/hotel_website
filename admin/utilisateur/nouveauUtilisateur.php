@@ -1,7 +1,7 @@
 <?php 
  
-  require_once('../identifier.php');
-  require_once('../dp.php');
+  require_once('../../identifier.php');
+  require_once('../../dp.php');
 
   $requeteRole = "select * from role";
   $resultatRole = $pdo->query($requeteRole);
@@ -35,7 +35,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="../accueil.php">KADIANDOUMAN</a>
+    <a class="navbar-brand mr-1" href="../../accueil.php">KADIANDOUMAN</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -97,7 +97,7 @@
       <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="../accueil.php">
+        <a class="nav-link" href="../../accueil.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -161,7 +161,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../logout.php">
+        <a class="nav-link" href="../../logout.php">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Déconnexion</span></a>
       </li>
@@ -222,10 +222,9 @@
         </div>
       </div>
       <!-- Sticky Footer -->
-      <?php include('../footer.php') ?> 
+      <?php include('../../footer.php') ?> 
     </div>   
   </div>
-
    <!-- Bootstrap core JavaScript-->
  <script src="../bootstrap4/vendor/jquery/jquery.min.js"></script>
   <script src="../bootstrap4/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

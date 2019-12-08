@@ -1,7 +1,7 @@
 <?php
       
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $idclient = isset($_POST['idCl'])?$_POST['idCl']:1;
     $idChambre = isset($_POST['id_chambre'])?$_POST['id_chambre']:1;

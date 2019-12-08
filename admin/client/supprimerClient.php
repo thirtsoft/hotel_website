@@ -1,7 +1,6 @@
 <?php
-    //require_once('../db.php');
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
     
     $idc = isset($_GET['idCl'])?$_GET['idCl']:0;
 
