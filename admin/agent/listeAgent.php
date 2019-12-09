@@ -1,7 +1,6 @@
 <?php
- 
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $requeteAgent = "select id_agent, nom_agent, prenom_agent, tel_agent, email_agent, poste 
         from utilisateur as u, agent as a
@@ -18,7 +17,6 @@
 
     /* $reste = $nbreAgent % $size;
            
-
     if(($reste) === 0)
         $nbrePage = floor($nbreAgent/$size); // permet de prendre que la partie entire de la division
     else
@@ -27,9 +25,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,7 +49,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-        <a class="navbar-brand mr-1" href="../accueil.php">KADIANDOUMAN</a>
+        <a class="navbar-brand mr-1" href="../../accueil.php">KADIANDOUMAN</a>
 
         <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -115,7 +111,7 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="../accueil.php">
+                <a class="nav-link" href="../../accueil.php">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
                 </a>
@@ -179,7 +175,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../logout.php">
+                <a class="nav-link" href="../../logout.php">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Déconnexion</span></a>
             </li>
@@ -199,7 +195,7 @@
                         <a class="btn btn-success col-md-3" style="align-right" href="nouveauAgent.php"><i class="fas fa-plus-circle"></i> 
                             Nouveau gérant
                         </a>&nbsp;&nbsp;
-                        <a class="btn btn-info col-md-3" href="../accueil.php"><span class="fas fa-retour"></span>
+                        <a class="btn btn-info col-md-3" href="../../accueil.php"><span class="fas fa-retour"></span>
                                     Retour 
                         </a> 
                     </div>
@@ -238,7 +234,7 @@
                     </div>
                 </div>
             </div>&nbsp;&nbsp;
-            <?php include('../footer.php')  ?>
+            <?php include('../../footer.php'); ?> 
         </div>
     </div>
      

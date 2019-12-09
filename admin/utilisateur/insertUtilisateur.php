@@ -1,7 +1,7 @@
 <?php
    
-    require_once('../identifier.php');
-    require_once('../dp.php');
+    require_once('../../identifier.php');
+    require_once('../../dp.php');
 
     $login = isset($_POST['username'])?$_POST['username']:"";
     $poste = isset($_POST['poste'])?$_POST['poste']:"";
@@ -14,7 +14,7 @@
         $params = array($role,$login,$password,$poste,$actived); 
 
     }else{
-        $requete = "insert into utilisateur(username,id_role,poste,actived,password) values(?,?,?,?,?)";
+        $requete = "insert into utilisateur(id_role,username,password,poste,actived) values(?,?,?,?,?)";
         $params = array($role,$login,$password,$poste,$actived); 
     }
     

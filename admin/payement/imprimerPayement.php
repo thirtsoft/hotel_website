@@ -39,7 +39,7 @@
     $pdf->Ln(10);
     //Facture
     $pdf->SetFont('Arial','B', 11);
-    $pdf->Cell(200, 10, 'FACTURE DE LA RESERVATION', 0, 0);
+    $pdf->Cell(200, 10, 'FACTURE : '. $payment['id_payement'], 0, 0);
     $pdf->Ln(15);
     // Info Commande
     $pdf->SetFont('Arial','B',11);
@@ -59,34 +59,34 @@
     $pdf->Ln(20);
 
     //$pdf->Cell(20, 10, '#',1,0,'L');
-    $pdf->Cell(20, 10, 'Categorie',1,0,'L');
-    $pdf->Cell(30, 10, 'Chambre',1,0,'L');
-    $pdf->Cell(25, 10, 'Prix.J',1,0,'L');
-    $pdf->Cell(20, 10, 'Jours',1,0,'L');
-    $pdf->Cell(30, 10, 'Paiement',1,0,'L');
-    $pdf->Cell(20, 10, 'Verse', 1,0,'L');
-    $pdf->Cell(20, 10, 'Restant', 1,0,'L');
-    $pdf->Cell(30, 10, 'P.Total',1,0,'L');
+    $pdf->SetFont('Arial','',12);
+    $pdf->SetXY(10,125);
+    $pdf->Cell(20, 10, 'Categorie',1,0,'C');
+    $pdf->Cell(30, 10, 'Chambre',1,0,'C');
+    $pdf->Cell(25, 10, 'Prix.J',1,0,'C');
+    $pdf->Cell(20, 10, 'Jours',1,0,'C');
+    $pdf->Cell(30, 10, 'Paiement',1,0,'C');
+    $pdf->Cell(20, 10, 'Verse', 1,0,'C');
+    $pdf->Cell(20, 10, 'Restant', 1,0,'C');
+    $pdf->Cell(30, 10, 'P.Total',1,0,'C');
     $pdf->Ln(8);
-    $pdf->setFont('Arial', "",14);
-     
+    $pdf->setFont('Arial', "B",12);
     //Informations du tableau
-    //$pdf->Cell(20, 10,$payment['id_payement'],1,0,'L');
-    $pdf->Cell(20, 10,$payment['nom_categorie'],1,0,'L');
-    $pdf->Cell(30,10,$payment['designation_chambre'],1,0,'L');
-    $pdf->Cell(25,10,$payment['prix_chambre'],1,0,'L');
+    $pdf->SetXY(10,135);
+    $pdf->Cell(20, 10,$payment['nom_categorie'],1,0);
+    $pdf->Cell(30,10,$payment['designation_chambre'],1,0);
+    $pdf->Cell(25,10,$payment['prix_chambre'],1,0);
     //$pdf->Cell(40,10,$payment['prix_chambre'],1,0,'L');
-    $pdf->Cell(20,10,2,1,0,'C');
-    $pdf->Cell(30,10,$payment['type'].'CFA',1,0,'L');
-    $pdf->Cell(20,10,$payment['montant_verse'],1,0,'L');
-    $pdf->Cell(20,10,$payment['montant_restant'],1,0,'L');
-    $pdf->Cell(30,10,($payment['prix_chambre']).'.CFA',1,0,'C', 0);
+    $pdf->Cell(20,10,2,1,0);
+    $pdf->Cell(30,10,$payment['type'],1,0);
+    $pdf->Cell(20,10,$payment['montant_verse'],1,0);
+    $pdf->Cell(20,10,$payment['montant_restant'],1,0);
+    $pdf->Cell(30,10,($payment['prix_chambre']).'.CFA',1,0);
     $pdf->Ln(8);
     $pdf->Ln(15);
-    $pdf->setFont('Arial', "",14);
-    $pdf->Cell(140, 10, '',0,0);
+    $pdf->setFont('Arial', "B",12);
+    $pdf->Cell(150, 10, '',0,0);
     $pdf->Cell(40,8, 'P.Total : '.($payment['prix_chambre']).'.CFA',0,1,'C', 0);
-
     
     }
     $pdf->Output();

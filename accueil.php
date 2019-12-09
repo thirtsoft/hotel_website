@@ -23,22 +23,24 @@
   $nbreCommande = $tabCount['countCmd'];
 
   // Nomre de commande par mois
-  $req = $pdo->prepare("select extract(month from date_commande) mois, count(cmd.id_commande) CountCmd 
+  $req = $pdo->prepare("select date_commande, extract(month from date_commande) mois, count(cmd.id_commande) CountCmd 
         from commande as cmd
         group by(mois)
         order by mois asc");
   $req->execute();
   $data = [];
   $tab = [];
+  
   while ($dataCmd = $req->fetch(PDO::FETCH_ASSOC)) {
     extract($dataCmd);
-    $data[] = $mois;
+    $date = date('M', strtotime($dataCmd['date_commande']));
+    $data[] = $date;
     $tab[] = $dataCmd['CountCmd'];
   }
  // echo json_encode($data);
  // echo json_encode($tab);
   //Nombre de reservation par mois
-  $req1 = $pdo->prepare("select extract(month from date_debut) mois, count(r.id_reservation) CountReserv
+  $req1 = $pdo->prepare("select date_debut, extract(month from date_debut) mois, count(r.id_reservation) CountReserv
         from reservation as r
         group by mois
         order by mois asc");
@@ -47,7 +49,9 @@
   $tab1 = [];
   while ($dataReserv = $req1->fetch(PDO::FETCH_ASSOC)) {
     extract($dataReserv);
-    $data1[] = $mois;
+    //$data1[] = $mois;
+    $date = date('M', strtotime($dataReserv['date_debut']));
+    $data1[] = $date;
     $tab1[] = $dataReserv['CountReserv'];
   }
   
@@ -297,22 +301,22 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-chart-area"></i>
-            Area Chart Example</div>
+            Graphes des Commandes/Mois</div>
           <div class="card-body">
             <canvas id="myAreaChart" width="100%" height="30"></canvas>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted"></div>
         </div>
 
         <!-- Area Chart Example-->
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-chart-area"></i>
-            Area Chart Example</div>
+            Graphes des Reservations/Mois</div>
           <div class="card-body">
             <canvas id="myAreaChart1" width="100%" height="30"></canvas>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          <div class="card-footer small text-muted"></div>
         </div>
         <!-- DataTables Example -->
     

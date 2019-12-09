@@ -27,7 +27,18 @@
       $NbreReservationParMoi [] = $dataReservation['countR'];
     }
    // echo json_encode($NbreReservationParMoi); 
-
+    // Compter le nombre de chambre occupe
+    $reqEtatChambre = $pdo->prepare("select etat_chambre, count(ch.id_chambre) CountCHEtat
+              from chambre as ch group by etat_chambre");
+    $reqEtatChambre->execute();
+    $tabEtat = [];
+    $tabdonnes = [];
+    while ($dataChambreParEtat = $reqEtatChambre->fetch(PDO::FETCH_ASSOC)) {
+      extract($dataChambreParEtat);
+      $tabEtat [] = $etat_chambre;
+      $tabdonnes[] = $dataChambreParEtat['CountCHEtat'];
+    }
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,7 +128,7 @@
 
   <div id="wrapper">
      <!-- Sidebar -->
-     <ul class="sidebar navbar-nav">
+    <ul class="sidebar navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="../accueil.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -198,7 +209,17 @@
           </li>
           <li class="breadcrumb-item active">Graphes</li>
         </ol>
-       
+
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-chart-pie"></i>
+               Diagramme Circulaire Status Chambre</div>
+            <div class="card-body">
+              <canvas id="myPieChart" width="100%" height="50"></canvas>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          </div>
+        </div>
         <!-- Diagramme en barres--> 
         <div class="card mb-3">
           <div class="card-header">
@@ -243,7 +264,7 @@
   <script src="./bootstrap4/js/demo/chart-area-demo.js"></script>
  
   
-  <script src="./bootstrap4/js/demo/chart-pie-demo.js"></script>
+ <!--  <script src="./bootstrap4/js/demo/chart-pie-demo.js"></script> -->
   <script>
     var ctx = document.getElementById('myBarChart').getContext('2d');
     var myLineChart = new Chart(ctx, {
@@ -259,6 +280,21 @@
                   },
                   options: {}
       }); 
+    </script>
+    <script>
+        // Pie Chart Example
+      var ctx = document.getElementById("myPieChart");
+      var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: <?php echo json_encode($tabEtat); ?>,
+          datasets: [{
+            data: <?php echo json_encode($tabdonnes); ?>, 
+            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+          }],
+   
+        },
+      });
     </script>
 </body>
 

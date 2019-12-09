@@ -191,9 +191,9 @@
                 <div class="card margetop60">
                     <div class="card-body">
                         <form method="post" action="updateComptable.php" class="form" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="idC">Id Comptable : <?php echo $idC ?> </label>
-                                <input type="hidden" name="idC" class="form-control" 
+                            <div class="alert alert-info">
+                              <label for="idC">Id Comptable : <?php echo $idC ?> </label>
+                              <input type="hidden" name="idC" class="form-control" 
                                     value="<?php echo $idC ?>"/>
                             </div>
                             <div class="form-group">

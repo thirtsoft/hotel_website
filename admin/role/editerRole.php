@@ -182,9 +182,9 @@
                 <div class="card margetop60">
                     <div class="card-body">
                         <form method="post" action="updateRole.php" class="form" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="id">Id role : <?php echo $idr ?> </label>
-                                <input type="hidden" name="idR" class="form-control" 
+                            <div class="alert alert-info">
+                              <label for="id">Id role : <?php echo $idr ?> </label>
+                              <input type="hidden" name="idR" class="form-control" 
                                     value="<?php echo $idr ?>"/>
                             </div>
                             <div class="form-group">

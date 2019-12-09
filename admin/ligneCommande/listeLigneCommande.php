@@ -184,7 +184,7 @@
                           <span class="fas fa-edit "></span> 
                         </a>
                         <a class="btn btn-danger" onclick="return confirm('Etes vous sur de vouloir supprimer cette offre')"
-                          href="supprimerLigneCommande.php?idO=<?php echo $ligneCommande['id_ligneCommande'] ?>">
+                          href="supprimerLigneCommande.php?idLigneCmd=<?php echo $ligneCommande['id_ligneCommande'] ?>">
                           <span class="fas fa-trash "></span> 
                         </a>
                       </td>

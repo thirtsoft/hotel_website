@@ -38,12 +38,11 @@
     $pdf->Ln(10);
     //Facture
     $pdf->SetFont('Arial','B', 11);
-    $pdf->Cell(200, 10, 'FACTURE DE LA COMMANDE', 0, 0);
+    $pdf->Cell(200, 10, 'FACTURE :'. $commande['num_commande'], 0, 0);
     $pdf->Ln(15);
     // Info Commande
     $pdf->SetFont('Arial','B',11);
     $pdf->Cell(140, 8, 'Pour :', 0,0);
-    $pdf->Cell(15, 8, 'Num Commande : '. $commande['num_commande'], 0, 0);
     $pdf->Ln(8);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(140, 8, 'Nom : '. $commande['nom_client'], 0);
@@ -55,8 +54,9 @@
     $pdf->Cell(15, 8, 'Adresse : '. $commande['addresse_client'], 0);
     $pdf->Ln(8);
     $pdf->Cell(15, 8, 'Tel : '. $commande['telephone_client'], 0);
-    $pdf->Ln(20);
-    
+    $pdf->Ln(50);
+    //$pdf->Ln(20);
+    $pdf->SetXY(10,125);
     $pdf->Cell(20, 10, '#',1,0,'L');
     $pdf->Cell(30, 10, 'Plat',1,0,'L');
     $pdf->Cell(40, 10, 'Nom',1,0,'L');
@@ -65,8 +65,11 @@
     $pdf->Cell(40, 10, 'Total',1,0,'L');
     $pdf->Ln(8);
     $pdf->setFont('Arial', "",14);
+    $pdf->Ln(8);
+    $pdf->Ln(15);
     
     //Informations du tableau
+    $pdf->SetXY(10,135);
     $pdf->Cell(20, 10,$commande['num_commande'],1,0,'L');
     $pdf->Cell(30,10,$commande['photo_menu'],1,0,'L');
     $pdf->Cell(40,10,$commande['designation'],1,0,'L');
