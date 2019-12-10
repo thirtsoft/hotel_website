@@ -30,8 +30,9 @@
         and m.id_menu = lcmd.id_menu";
 
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreLigneCommande = $tabCount['countLcmd']; //decompter le nbre de filiere
+   // $tabCount = $resultatCount->fetch();
+    //$nbreLigneCommande = $tabCount['countLcmd']; //decompter le nbre de filiere
+    $nbreLigneCommande = $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

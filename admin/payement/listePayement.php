@@ -19,8 +19,9 @@
     $resultatReservation = $pdo->query($requeteReservation);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbrePayement = $tabCount['countP']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbrePayement = $tabCount['countP']; //decompter le nbre de filiere
+    $nbrePayement = $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

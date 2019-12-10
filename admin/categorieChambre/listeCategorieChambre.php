@@ -9,8 +9,9 @@
     $resultatCategorie = $pdo->query($requete);
 
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreCategorie = $tabCount['countCat']; //decompter le nbre de categorie
+    //$tabCount = $resultatCount->fetch();
+    //$nbreCategorie = $tabCount['countCat']; //decompter le nbre de categorie
+    $nbreCategorie = $resultatCount->fetchColumn(); 
 
    /*  $reste = $nbreCategorie % $size;
            

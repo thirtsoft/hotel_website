@@ -17,8 +17,9 @@
     $resultatComptable = $pdo->query($requeteComptable);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreComptable = $tabCount['countC']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreComptable = $tabCount['countC']; //decompter le nbre de filiere
+    $nbreComptable = $resultatCount->fetchColumn(); 
 
     /* $reste = $nbreComptable % $size;
            

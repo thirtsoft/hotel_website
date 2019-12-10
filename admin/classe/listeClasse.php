@@ -10,8 +10,9 @@
     $resultatClasse = $pdo->query($requete);
 
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreClasse = $tabCount['countC']; //decompter le nbre de classe
+    //$tabCount = $resultatCount->fetch();
+    //$nbreClasse = $tabCount['countC']; //decompter le nbre de classe
+    $nbreClasse = $resultatCount->fetchColumn(); 
 
     /* $reste = $nbreClasse % $size;
            

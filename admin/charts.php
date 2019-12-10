@@ -14,17 +14,18 @@
    // echo json_encode($year);
 
     // Calculer le nombre de reservation par année
-    $req = $pdo->prepare("select DISTINCT annee, count(r.id_reservation) countR 
+    $req = $pdo->prepare("select DISTINCT annee, count(r.id_reservation) as countR 
           from reservation as r 
           group by annee 
           order by annee asc");
     $req->execute();
     $dataReserAnnee = [];
-    $NbreReservationParMoi = [];
+    $NbreReservationParMoi;
     while ($dataReservation = $req->fetch(PDO::FETCH_ASSOC)) {
       extract($dataReservation);
       $dataReserAnnee[] = $annee;
       $NbreReservationParMoi [] = $dataReservation['countR'];
+  
     }
    // echo json_encode($NbreReservationParMoi); 
     // Compter le nombre de chambre occupe

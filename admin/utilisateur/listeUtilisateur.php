@@ -16,8 +16,9 @@
     $resultatUtilisateur = $pdo->query($requeteUtilisateur);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreUtilisateur = $tabCount['countU']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreUtilisateur = $tabCount['countU']; //decompter le nbre de filiere
+    $nbreUtilisateur = $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

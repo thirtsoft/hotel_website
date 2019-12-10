@@ -20,8 +20,9 @@
     $resultatCommande = $pdo->query($requeteCommande);
   
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreCommande = $tabCount['countCmd']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreCommande = $tabCount['countCmd']; //decompter le nbre de filiere
+    $nbreCommande =  $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

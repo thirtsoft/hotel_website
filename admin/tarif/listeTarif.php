@@ -17,8 +17,9 @@
     $resultatTarif = $pdo->query($requeteTarif);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreTarif = $tabCount['countT']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreTarif = $tabCount['countT']; //decompter le nbre de filiere
+    $nbreTarif = $requeteCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

@@ -15,8 +15,9 @@
     $resultatRole = $pdo->query($requeteRole);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreRole = $tabCount['countR']; //decompter le nbre de filiere
+   // $tabCount = $resultatCount->fetch();
+   // $nbreRole = $tabCount['countR']; //decompter le nbre de filiere
+   $nbreRole = $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

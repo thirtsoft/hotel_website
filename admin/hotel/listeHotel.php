@@ -13,8 +13,9 @@
      $resultatHotel = $pdo->query($requeteHotel);
      
      $resultatCount = $pdo->query($requeteCount);
-     $tabCount = $resultatCount->fetch();
-     $nbreHotel = $tabCount['countH']; //decompter le nbre de filiere
+     //$tabCount = $resultatCount->fetch();
+     //$nbreHotel = $tabCount['countH']; //decompter le nbre de filiere
+     $nbreHotel = $resultatCount->fetchColumn(); 
 
     /*  $reste = $nbreHotel % $size;
            

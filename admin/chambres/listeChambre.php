@@ -16,8 +16,9 @@
     $resultatChambre = $pdo->query($requeteChambre);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreChambre = $tabCount['countCH']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreChambre = $tabCount['countCH']; //decompter le nbre de filiere
+    $nbreChambre = $resultatCount->fetchColumn(); 
 
     /* $reste = $nbreChambre % $size;
            

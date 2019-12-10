@@ -21,8 +21,9 @@
     $resultatOffre = $pdo->query($requeteOffre);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreOffre = $tabCount['countO']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreOffre = $tabCount['countO']; //decompter le nbre de filiere
+    $nbreOffre = $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

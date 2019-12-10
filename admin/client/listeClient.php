@@ -32,8 +32,9 @@
     $resultatClient = $pdo->query($requeteClient);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreClient = $tabCount['countCl']; //decompter le nbre de filiere
+    $nbreClient = $resultatCount->fetchColumn(); 
+   // $tabCount = $resultatCount->fetch();
+    //$nbreClient = $tabCount['countCl']; //decompter le nbre de filiere
 
 
 ?>

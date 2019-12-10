@@ -15,7 +15,8 @@
     $params = array($nomCl, $prenomCl, $adCl, $villeCl, $paysCl, $telCl, $emailCl); 
         
     $resultat = $pdo->prepare($requete);
-    $resultat->execute($params);  
+    $resultat->execute($params); 
+    header('location:listeClient.php'); 
 
 
 ?>

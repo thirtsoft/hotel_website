@@ -14,8 +14,9 @@
     $resultatMenu = $pdo->query($requete);
 
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreMenu = $tabCount['countM']; //decompter le nbre de classe
+    //$tabCount = $resultatCount->fetch();
+    //$nbreMenu = $tabCount['countM']; //decompter le nbre de classe
+    $nbreMenu = $resultatCount->fetchColumn(); 
 
 ?>
 <!DOCTYPE html>

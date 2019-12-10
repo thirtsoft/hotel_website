@@ -2,25 +2,27 @@
   require_once('identifier.php');
   require_once('dp.php');
   //Compter le nombre total de Client de l'hotel
-  $requeteCountClient = "select count(*) countClient from client";
+  $requeteCountClient = "select count(*) as countClient from client";
   $resultatCountClient = $pdo->query($requeteCountClient);
-  $tabCount = $resultatCountClient->fetch();
-  $nbreClient = $tabCount['countClient']; 
+  $nbreClient = $resultatCountClient->fetchColumn();
+  //$tabCount = $resultatCountClient->fetch();
+
+  //$nbreClient = $tabCount['countClient']; 
   //Compter le nombre total de Chambre de l'hotel
-  $requeteCountChambre = "select count(*) countCh from chambre";
+  $requeteCountChambre = "select count(*) as countCh from chambre";
   $resultatCountChambre = $pdo->query($requeteCountChambre);
-  $tabCount = $resultatCountChambre->fetch();
-  $nbreChambre = $tabCount['countCh']; 
+  //$tabCount = $resultatCountChambre->fetch();
+  $nbreChambre = $resultatCountChambre->fetchColumn(); 
   //Compter le nombre total de Reservation de l'hotel
-  $requeteCountReserv = "select count(*) countReserv from reservation";
+  $requeteCountReserv = "select count(*) as countReserv from reservation";
   $resultatCountReserv = $pdo->query($requeteCountReserv);
-  $tabCount = $resultatCountReserv->fetch();
-  $nbreReservation = $tabCount['countReserv'];
+  //$tabCount = $resultatCountReserv->fetch();
+  $nbreReservation = $resultatCountReserv->fetchColumn(); 
   //Compter le nombre total de Commande de l'hotel
-  $requeteCountCmd = "select count(*) countCmd from commande";
+  $requeteCountCmd = "select count(*) as countCmd from commande";
   $resultatCountCmd = $pdo->query($requeteCountCmd);
-  $tabCount = $resultatCountCmd->fetch();
-  $nbreCommande = $tabCount['countCmd'];
+  //$tabCount = $resultatCountCmd->fetch();
+  $nbreCommande = $resultatCountCmd->fetchColumn(); 
 
   // Nomre de commande par mois
   $req = $pdo->prepare("select date_commande, extract(month from date_commande) mois, count(cmd.id_commande) CountCmd 
@@ -35,7 +37,7 @@
     extract($dataCmd);
     $date = date('M', strtotime($dataCmd['date_commande']));
     $data[] = $date;
-    $tab[] = $dataCmd['CountCmd'];
+    $tab[] = $dataCmd->fetchColumn(); ;
   }
  // echo json_encode($data);
  // echo json_encode($tab);

@@ -21,8 +21,9 @@
     $resultatReservation = $pdo->query($requeteReservation);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreReservation = $tabCount['countR']; //decompter le nbre de filiere
+    //$tabCount = $resultatCount->fetch();
+    //$nbreReservation = $tabCount['countR']; //decompter le nbre de filiere
+    $nbreReservation = $resultatCount->fetchColumn(); 
 
     //Nbre de jour de reservation
     $reqNbreJours =  $pdo->prepare("select abs(datediff(date_fin, date_debut)) as nbreJour from reservation");

@@ -6,10 +6,6 @@
     $idR = isset($_GET['id_reservation'])?$_GET['id_reservation']:0;
     $idCmd = isset($_GET['id_commande'])?$_GET['id_commande']:0;
 
-    /* $size = isset($_GET['size'])?$_GET['size']:6; 
-    $page = isset($_GET['page'])?$_GET['page']:1;
-    $offset = ($page - 1) * $size; */
-   
     $requeteClient = "select * from client where id_client= $idcl";
     $resultatClient = $pdo->query($requeteClient);
     $client = $resultatClient->fetch();
@@ -41,8 +37,9 @@
     $resultatReservation = $pdo->query($requeteReservation);
 
     $resultatCountR = $pdo->query($requeteCountReservClient);
-    $tabCountR = $resultatCountR->fetch();
-    $nbreReservation = $tabCountR['countR'];
+    //$tabCountR = $resultatCountR->fetch();
+    //$nbreReservation = $tabCountR['countR'];
+    $nbreReservation = $resultatCountR->fetchColumn(); 
 
      
     $requeteCommande = "select num_commande, date_commande, heure_commande, quantite, type, designation, prix, photo_menu
@@ -62,8 +59,9 @@
     $resultatCommande = $pdo->query($requeteCommande);
 
     $resultatCountCmd = $pdo->query($requeteCountCmdClient);
-    $tabCountCmd = $resultatCountCmd->fetch();
-    $nbreCommande = $tabCountCmd['countCmd'];
+    //$tabCountCmd = $resultatCountCmd->fetch();
+    //$nbreCommande = $tabCountCmd['countCmd'];
+    $nbreCommande = $resultatCountCmd->fetchColumn(); 
 
 
 ?>

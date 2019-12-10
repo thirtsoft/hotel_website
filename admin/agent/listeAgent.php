@@ -12,8 +12,9 @@
     $resultatAgent = $pdo->query($requeteAgent);
      
     $resultatCount = $pdo->query($requeteCount);
-    $tabCount = $resultatCount->fetch();
-    $nbreAgent = $tabCount['countA']; //decompter le nbre de filiere
+   // $tabCount = $resultatCount->fetch();
+    //$nbreAgent = $tabCount['countA']; //decompter le nbre de filiere
+    $nbreAgent = $resultatCount->fetchColumn(); 
 
     /* $reste = $nbreAgent % $size;
            
